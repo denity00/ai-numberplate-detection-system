@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Загрузка фото{% endblock %}
+
+{% block body %}
+    <h1>Загрузите фото автомобиля</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Загрузить</button>
+    </form>
+{% endblock %}

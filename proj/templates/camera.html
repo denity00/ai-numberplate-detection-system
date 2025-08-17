@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Просмотр камеры в реальном времени
+{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-4">Просмотр камеры в реальном времени</h1>
+    <div class="text-center">
+        <img src="{{ url_for('video_feed') }}" alt="Live Camera Feed" class="img-fluid">
+    </div>
+    <div class="text-center mt-4">
+        <h3>Результат распознавания:</h3>
+        <p id="plate" class="alert alert-info" style="font-size: 1.5rem;">Номер не распознан</p>
+        <p id="status" class="alert alert-secondary" style="font-size: 1.5rem;">Статус: —</p>
+    </div>
+
+    <script>
+        // Функция для обновления распознанного номера и статуса
+        function updatePlate() {
+            fetch('/get_plate')
+                .then(response => response.json())
+                .then(data => {
+                    const plateElement = document.getElementById('plate');
+                    const statusElement = document.getElementById('status');
+
+                    if (data.plate) {
+                        plateElement.textContent = `Номер: ${data.plate}`;
+                        statusElement.textContent = `Статус: ${data.status}`;
+
+                        // Изменяем цвет статуса
+                        if (data.status === "Проезд разрешен") {
+                            statusElement.classList.remove('alert-danger', 'alert-secondary');
+                            statusElement.classList.add('alert-success');
+                        } else if (data.status === "Проезд запрещен") {
+                            statusElement.classList.remove('alert-success', 'alert-secondary');
+                            statusElement.classList.add('alert-danger');
+                        } else {
+                            statusElement.classList.remove('alert-success', 'alert-danger');
+                            statusElement.classList.add('alert-secondary');
+                        }
+                    } else {
+                        plateElement.textContent = 'Номер не распознан';
+                        statusElement.textContent = 'Статус: —';
+                        statusElement.classList.remove('alert-success', 'alert-danger');
+                        statusElement.classList.add('alert-secondary');
+                    }
+                })
+                .catch(error => console.error('Ошибка:', error));
+        }
+
+        // Обновляем номер и статус каждые 10 секунд
+        setInterval(updatePlate, 10000);
+
+        // Вызываем сразу при загрузке страницы
+        updatePlate();
+    </script>
+{% endblock %}

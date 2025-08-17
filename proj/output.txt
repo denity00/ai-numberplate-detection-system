@@ -1,0 +1,4 @@
+./img/1.jpg | ['E781KX36']
+./img/2.jpeg | ['M222MM02']
+./img/3.jpg | ['E730KX99']
+./img/4.jpg | ['E888EE02']

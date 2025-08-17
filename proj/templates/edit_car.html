@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактирование машины{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-5">Редактирование машины</h1>
+
+        <form method="POST" action="{{ url_for('edit_car', id=car.id) }}">
+            <div class="mb-3">
+                <label for="plates" class="form-label">Номер машины</label>
+                <input type="text" class="form-control" id="plates" name="plates" value="{{ car.plates }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="fio" class="form-label">ФИО</label>
+                <input type="text" class="form-control" id="fio" name="fio" value="{{ car.fio }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="room" class="form-label">Комната</label>
+                <input type="text" class="form-control" id="room" name="room" value="{{ car.room }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Телефон</label>
+                <input type="text" class="form-control" id="phone" name="phone" value="{{ car.phone }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            <a href="{{ url_for('whitelist') }}" class="btn btn-secondary">Отмена</a>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить машину{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center my-4">Добавить машину</h1>
+        <form method="POST" class="mx-auto" style="max-width: 400px;">
+            <div class="mb-3">
+                <label for="plates" class="form-label">Номер автомобиля:</label>
+                <input type="text" id="plates" name="plates" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="fio" class="form-label">ФИО владельца:</label>
+                <input type="text" id="fio" name="fio" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="room" class="form-label">Комната:</label>
+                <input type="text" id="room" name="room" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Телефон:</label>
+                <input type="text" id="phone" name="phone" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Добавить</button>
+        </form>
+    </div>
+{% endblock %}

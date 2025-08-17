@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Результат{% endblock %}
+
+{% block body %}
+    <h1>Результат</h1>
+    <p>Номер автомобиля: {{ plates }}</p>
+    <p>Владелец: {{ car.fio }}</p>
+    <p>Комната: {{ car.room }}</p>
+    <p>Телефон: {{ car.phone }}</p>
+    <a href="/upload">Загрузить еще одно фото</a>
+{% endblock %}

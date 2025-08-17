@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Загрузка заявок пользователей{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-5">Загрузка заявок пользователей</h1>
+
+        {% if entries %}
+            <form method="POST" action="{{ url_for('upload_json') }}">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Выбрать</th>
+                            <th>Номер машины</th>
+                            <th>ФИО</th>
+                            <th>Комната</th>
+                            <th>Телефон</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in entries %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="selected_entries" value="{{ entry.index }}">
+                            </td>
+                            <td>{{ entry['plates'] }}</td>
+                            <td>{{ entry['fio'] }}</td>
+                            <td>{{ entry['room'] }}</td>
+                            <td>{{ entry['phone'] }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary">Загрузить выбранные заявки</button>
+            </form>
+        {% else %}
+            <div class="alert alert-warning">Нет данных для отображения.</div>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">На главную</a>
+    </div>
+{% endblock %}

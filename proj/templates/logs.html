@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Логи въездов{% endblock %}
+
+{% block body %}
+    <h1>Логи въездов</h1>
+    <a href="/">На главную</a>
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Номер автомобиля</th>
+                <th>Дата и время</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log.id }}</td>
+                    <td>{{ log.plates }}</td>
+                    <td>{{ log.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
